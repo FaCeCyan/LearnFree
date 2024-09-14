@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LearnFree - Free Learning Classes for Kids</title>
+    <style>
+        /* Base styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #004aad;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+            margin: 0 20px;
+            cursor: pointer;
+        }
+
+        nav a.active {
+            font-weight: bold;
+            border-bottom: 2px solid #fff;
+        }
+
+        /* Header */
+        header {
+            background-color: #004aad;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            font-weight: bold;
+        }
+
+        header p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .header-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .header-btns a {
+            padding: 12px 30px;
+            background-color: #fff;
+            color: #004aad;
+            border-radius: 5px;
+            font-size: 1.2em;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .subject-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .subject-tabs a {
+            padding: 10px 20px;
+            border: 1px solid #004aad;
+            border-radius: 5px;
+            color: #004aad;
+            text-decoration: none;
+            margin: 0 5px;
+            font-weight: bold;
+        }
+
+        .subject-tabs a.active {
+            background-color: #004aad;
+            color: white;
+        }
+
+        /* Signup Modal */
+        #signup-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .modal-content h2 {
+            color: #004aad;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .modal-content select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal-content button {
+            background-color: #004aad;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #add8e6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="#home" class="nav-link active" onclick="showTab('home')">Home</a>
+        <a href="#subjects" class="nav-link" onclick="showTab('subjects')">Subjects</a>
+        <a href="#signup" onclick="openSignup()">Sign Up</a>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+        <h1>LearnFree</h1>
+        <p>Empowering young minds through free education</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- Home Tab -->
+        <div id="home" class="tab-content active">
+            <h2>Welcome to LearnFree</h2>
+            <p>At LearnFree, we offer a variety of free classes for Kindergarten to 4th graders in Math, English, and Science. Our goal is to provide high-quality education resources to help young learners thrive.</p>
+        </div>
+
+        <!-- Subjects Tab -->
+        <div id="subjects" class="tab-content">
+            <div class="subject-tabs">
+                <a href="#" class="subject-tab" onclick="showSubject('math')">Math</a>
+                <a href="#" class="subject-tab" onclick="showSubject('english')">English</a>
+                <a href="#" class="subject-tab" onclick="showSubject('science')">Science</a>
+            </div>
+            <div id="math" class="subject-content">
+                <h2>Math Courses</h2>
+                <ul>
+                    <li>Kindergarten - Numbers & Shapes</li>
+                    <li>1st Grade - Simple Addition & Subtraction</li>
+                    <li>2nd Grade - Counting & Arithmetic</li>
+                    <li>3rd Grade - Fractions & Multiplication</li>
+                    <li>4th Grade - Geometry & Problem Solving</li>
+                </ul>
+            </div>
+            <div id="english" class="subject-content" style="display: none;">
+                <h2>English Courses</h2>
+                <ul>
+                    <li>Kindergarten - Phonics & Reading</li>
+                    <li>1st Grade - Vocabulary Building</li>
+                    <li>2nd Grade - Basic Grammar</li>
+                    <li>3rd Grade - Reading Comprehension</li>
+                    <li>4th Grade - Creative Writing</li>
+                </ul>
+            </div>
+            <div id="science" class="subject-content" style="display: none;">
+                <h2>Science Courses</h2>
+                <ul>
+                    <li>Kindergarten - Exploring Nature</li>
+                    <li>1st Grade - Animals & Plants</li>
+                    <li>2nd Grade - Basic Physics & Chemistry</li>
+                    <li>3rd Grade - Earth Science</li>
+                    <li>4th Grade - Simple Experiments</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signup-modal">
+        <div class="modal-content">
+            <h2>Sign Up for Free Classes</h2>
+            <label for="subject-select">Select a Subject:</label>
+            <select id="subject-select" onchange="updateCourses()">
+                <option value="">Select a Subject</option>
+                <option value="math">Math</option>
+                <option value="english">English</option>
+                <option value="science">Science</option>
+            </select>
+
+            <label for="course-select">Select a Course:</label>
+            <select id="course-select">
+                <option value="">Select a Course</option>
+            </select>
+
+            <label for="schedule-select">Select a Schedule:</label>
+            <select id="schedule-select">
+                <option value="morning">Morning (8:00 AM - 10:00 AM)</option>
+                <option value="afternoon">Afternoon (12:00 PM - 2:00 PM)</option>
+                <option value="evening">Evening (4:00 PM - 6:00 PM)</option>
+            </select>
+
+            <button onclick="submitSignup()">Submit</button>
+        </div>
+    </div>
+
+    <!-- JS Script -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Initialize EmailJS with your Public Key
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your Public Key
+        })();
+
+        // Function to open the signup modal
+        function openSignup() {
+            document.getElementById('signup-modal').style.display = 'flex';
+        }
+
+        // Function to update the course options based on the selected subject
+        function updateCourses() {
+            const subject = document.getElementById('subject-select').value;
+            const courseSelect = document.getElementById('course-select');
+            courseSelect.innerHTML = ''; // Clear previous courses
+
+            const courses = {
+                math: [
+                    "Kindergarten - Numbers & Shapes",
+                    "1st Grade - Simple Addition & Subtraction",
+                    "2nd Grade - Counting & Arithmetic",
+                    "3rd Grade - Fractions & Multiplication",
+                    "4th Grade - Geometry & Problem Solving"
+                ],
+                english: [
+                    "Kindergarten - Phonics & Reading",
+                    "1st Grade - Vocabulary Building",
+                    "2nd Grade - Basic Grammar",
+                    "3rd Grade - Reading Comprehension",
+                    "4th Grade - Creative Writing"
+                ],
+                science: [
+                    "Kindergarten - Exploring Nature",
+                    "1st Grade - Animals & Plants",
+                    "2nd Grade - Basic Physics & Chemistry",
+                    "3rd Grade - Earth Science",
+                    "4th Grade - Simple Experiments"
+                ]
+            };
+
+            if (courses[subject]) {
+                courses[subject].forEach(course => {
+                    const option = document.createElement('option');
+                    option.value = course;
+                    option.text = course;
+                    courseSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Function to submit the signup form
+        function submitSignup() {
+            const subject = document.getElementById('subject-select').value;
+            const course = document.getElementById('course-select').value;
+            const schedule = document.getElementById('schedule-select').value;
+
+            if (!subject || !course || !schedule) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            // Send email via EmailJS with dynamic variables
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                to_email: "lordcyanofficial@gmail.com", // Your receiving email
+                subject: subject,
+                course: course,
+                schedule: schedule
+            }).then(function(response) {
+                alert("Signup submitted successfully!");
+                document.getElementById('signup-modal').style.display = 'none'; // Close modal
+            }, function(error) {
+                alert("Failed to send signup information. Please try again.");
+            });
+        }
+
+        // Function to show specific tab
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.nav-link[href="#${tabId}"]`).classList.add('active');
+        }
+
+        // Function to show specific subject content
+        function showSubject(subjectId) {
+            document.querySelectorAll('.subject-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            document.getElementById(subjectId).style.display = 'block';
+            document.querySelectorAll('.subject-tabs a').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            document.querySelector(`.subject-tabs a[onclick="showSubject('${subjectId}')"]`).classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
